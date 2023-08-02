@@ -2,7 +2,9 @@ package ru.netology.statistic;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;public class TodosTest {
+import org.junit.jupiter.api.Test;
+
+public class TodosTest {
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
@@ -27,6 +29,7 @@ import org.junit.jupiter.api.Test;public class TodosTest {
         Task[] actual = todos.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void shouldFindTask() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить в военкомат");

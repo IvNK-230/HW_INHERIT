@@ -49,7 +49,7 @@ public class TasksTest {
 
     @Test
     public void shouldFindQueryInMeetingForStart() {
-                Meeting meeting = new Meeting(
+        Meeting meeting = new Meeting(
                 444,
                 "Выкатка 3й версии приложения",
                 "Приложение НетоБанка",
@@ -59,6 +59,7 @@ public class TasksTest {
         boolean actual = meeting.matches("Во вторник после обеда");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldNotFindQueryInMeetingForTopic() {
         Meeting meeting = new Meeting(
@@ -71,6 +72,7 @@ public class TasksTest {
         boolean actual = meeting.matches("Выкатка 2й версии приложения");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldNotFindQueryInMeetingForProject() {
         Meeting meeting = new Meeting(
@@ -96,18 +98,20 @@ public class TasksTest {
         boolean actual = meeting.matches("Во вторник до обеда");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldFindQueryInEpic() {
-        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         boolean expected = true;
         boolean actual = epic.matches("Яйца");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldNotFindQueryInEpic() {
-        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         boolean expected = false;

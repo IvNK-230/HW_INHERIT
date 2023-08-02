@@ -1,4 +1,5 @@
 package ru.netology.statistic;
+
 public class SimpleTask extends Task {
     protected String title;
 
@@ -10,6 +11,7 @@ public class SimpleTask extends Task {
     public String getTitle() {
         return title;
     }
+
     @Override
     public boolean matches(String query) {
         if (title.contains(query)) {

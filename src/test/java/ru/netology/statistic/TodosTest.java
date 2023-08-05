@@ -10,12 +10,13 @@ public class TodosTest {
     SimpleTask simpleTask2 = new SimpleTask(4, "Позвонить в посольство");
     SimpleTask simpleTask3 = new SimpleTask(3, "Позвонить в военкомат");
 
-    String[] subtasks1 = {"Молоко", "Яйца", "Хлеб"};
-    Epic epic1 = new Epic(53, subtasks1);
-    String[] subtasks2 = {"Кефир", "Огурцы", "Курица"};
-    Epic epic2 = new Epic(53, subtasks2);
-    String[] subtasks3 = {"Помидоры", "Сметана", "Торт"};
-    Epic epic3 = new Epic(53, subtasks3);
+
+    String[] subtasks1 = {"Молоко", "Яйца", "Хлеб", "Булочки", "Батон"};
+    Epic epic1 = new Epic(55, subtasks1);
+    String[] subtasks2 = {"Огурцы", "Помидоры", "Перец", "Лук", "Морковь"};
+    Epic epic2 = new Epic(54, subtasks2);
+    String[] subtasks3 = {"Сливки", "Мука", "Торт", "Сметана"};
+    Epic epic3 = new Epic(52, subtasks3);
     Meeting meeting1 = new Meeting(
             555,
             "Выкатка 3й версии приложения",
@@ -64,8 +65,8 @@ public class TodosTest {
         todos.add(meeting2);
         todos.add(meeting3);
 
-        Task[] expected = {epic1};
-        Task[] actual = todos.search("Огурцы");
+        Task[] expected = {epic2};
+        Task[] actual = todos.search("Лук");
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -74,7 +75,7 @@ public class TodosTest {
         todos.add(simpleTask1);
 
         Task[] expected = {simpleTask1};
-        Task[] actual = todos.search("Позвонить родителям");
+        Task[] actual = todos.search("Позвонить");
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -82,7 +83,7 @@ public class TodosTest {
     public void shouldFindTaskWhenNoTasks() {
 
         Task[] expected = {};
-        Task[] actual = todos.search("Позвонить родителям");
+        Task[] actual = todos.search("Позвонить");
         Assertions.assertArrayEquals(expected, actual);
     }
 }

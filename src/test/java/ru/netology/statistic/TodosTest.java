@@ -5,50 +5,84 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TodosTest {
+    Todos todos = new Todos();
+    SimpleTask simpleTask1 = new SimpleTask(5, "Позвонить родителям");
+    SimpleTask simpleTask2 = new SimpleTask(4, "Позвонить в посольство");
+    SimpleTask simpleTask3 = new SimpleTask(3, "Позвонить в военкомат");
+
+    String[] subtasks1 = {"Молоко", "Яйца", "Хлеб"};
+    Epic epic1 = new Epic(53, subtasks1);
+    String[] subtasks2 = {"Кефир", "Огурцы", "Курица"};
+    Epic epic2 = new Epic(53, subtasks2);
+    String[] subtasks3 = {"Помидоры", "Сметана", "Торт"};
+    Epic epic3 = new Epic(53, subtasks3);
+    Meeting meeting1 = new Meeting(
+            555,
+            "Выкатка 3й версии приложения",
+            "Приложение НетоБанка",
+            "Во вторник после обеда"
+    );
+    Meeting meeting2 = new Meeting(
+            554,
+            "Обновление 5й версии",
+            "Приложение Тинькоф",
+            "В понедельник утром"
+    );
+    Meeting meeting3 = new Meeting(
+            553,
+            "Выкатка 2й версии приложения",
+            "Приложение Госуслуги",
+            "В пятницу утром"
+    );
+
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
-        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+        todos.add(simpleTask1);
+        todos.add(simpleTask2);
+        todos.add(simpleTask3);
+        todos.add(epic1);
+        todos.add(epic2);
+        todos.add(epic3);
+        todos.add(meeting1);
+        todos.add(meeting2);
+        todos.add(meeting3);
 
-        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
-        Epic epic = new Epic(55, subtasks);
-
-        Meeting meeting = new Meeting(
-                555,
-                "Выкатка 3й версии приложения",
-                "Приложение НетоБанка",
-                "Во вторник после обеда"
-        );
-
-        Todos todos = new Todos();
-
-        todos.add(simpleTask);
-        todos.add(epic);
-        todos.add(meeting);
-
-        Task[] expected = {simpleTask, epic, meeting};
+        Task[] expected = {simpleTask1, simpleTask2, simpleTask3, epic1, epic2, epic3, meeting1, meeting2, meeting3};
         Task[] actual = todos.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindTask() {
-        SimpleTask simpleTask = new SimpleTask(5, "Позвонить в военкомат");
+    public void shouldFindTaskWhenAllTasks() {
+        todos.add(simpleTask1);
+        todos.add(simpleTask2);
+        todos.add(simpleTask3);
+        todos.add(epic1);
+        todos.add(epic2);
+        todos.add(epic3);
+        todos.add(meeting1);
+        todos.add(meeting2);
+        todos.add(meeting3);
 
-        String[] subtasks = {"Мыло", "Верёвка", "Карабин"};
-        Epic epic = new Epic(50, subtasks);
+        Task[] expected = {epic1};
+        Task[] actual = todos.search("Огурцы");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
-        Meeting meeting = new Meeting(
-                666,
-                "Сходить в военкомат",
-                "Приготовить коктель",
-                "Завтра в полночь"
-        );
-        Todos todos = new Todos();
-        todos.add(simpleTask);
-        todos.add(epic);
-        todos.add(meeting);
-        Task[] expected = {epic};
-        Task[] actual = todos.search("Карабин");
+    @Test
+    public void shouldFindTaskWhenOneTask() {
+        todos.add(simpleTask1);
+
+        Task[] expected = {simpleTask1};
+        Task[] actual = todos.search("Позвонить родителям");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindTaskWhenNoTasks() {
+
+        Task[] expected = {};
+        Task[] actual = todos.search("Позвонить родителям");
         Assertions.assertArrayEquals(expected, actual);
     }
 }

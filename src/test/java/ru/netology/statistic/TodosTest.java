@@ -15,7 +15,7 @@ public class TodosTest {
     Epic epic1 = new Epic(55, subtasks1);
     String[] subtasks2 = {"Огурцы", "Помидоры", "Перец", "Лук", "Морковь"};
     Epic epic2 = new Epic(54, subtasks2);
-    String[] subtasks3 = {"Сливки", "Мука", "Торт", "Сметана"};
+    String[] subtasks3 = {"Сливки", "Перец", "Торт", "Сметана"};
     Epic epic3 = new Epic(52, subtasks3);
     Meeting meeting1 = new Meeting(
             555,
@@ -84,6 +84,22 @@ public class TodosTest {
 
         Task[] expected = {};
         Task[] actual = todos.search("Позвонить");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldFindTaskWhenFewTasks() {
+        todos.add(simpleTask1);
+        todos.add(simpleTask2);
+        todos.add(simpleTask3);
+        todos.add(epic1);
+        todos.add(epic2);
+        todos.add(epic3);
+        todos.add(meeting1);
+        todos.add(meeting2);
+        todos.add(meeting3);
+
+        Task[] expected = {epic2, epic3};
+        Task[] actual = todos.search("Перец");
         Assertions.assertArrayEquals(expected, actual);
     }
 }
